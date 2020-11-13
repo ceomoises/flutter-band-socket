@@ -55,7 +55,6 @@ class _HomePageState extends State<HomePage> {
         elevation: 1,
         actions: [
           Container(
-            // TODO : TERNARIO
             margin: EdgeInsets.only(right: 10),
             child: socketService.serverStatus == ServerStatus.Online
                 ? Icon(Icons.check_circle, color: Colors.blue[300])
@@ -65,7 +64,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: <Widget>[
-					_showGraph(),
+					if(bands.isNotEmpty)_showGraph(),
 					Expanded(
 					  child: ListView.builder(
 					  	itemCount: bands.length,
@@ -168,9 +167,8 @@ class _HomePageState extends State<HomePage> {
   }
 
 	// Mostrar Gráfica 
-
 	Widget _showGraph(){
-		
+
 		Map<String, double> dataMap = new Map();
 		bands.forEach( (band) => dataMap[ band.name ] = band.votes.toDouble() );
 
